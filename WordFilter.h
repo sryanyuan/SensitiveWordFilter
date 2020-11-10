@@ -1,3 +1,5 @@
+#pragma once
+
 #include <map>
 #include <string>
 
@@ -14,13 +16,13 @@ private:
 	string m_character;
 	_TreeMap m_map;
 	WordNode* m_parent;
-	
+
 public:
 	WordNode(string character);
-	WordNode(){
+	WordNode() {
 		m_character = "";
 	};
-	string getCharacter() const{ return m_character; };
+	string getCharacter() const { return m_character; };
 	WordNode* findChild(string& nextCharacter);
 	WordNode* insertChild(string& nextCharacter);
 };
@@ -33,10 +35,10 @@ class WordTree
 {
 public:
 	int count;
-	WordNode* insert(string &keyword);
+	WordNode* insert(string& keyword);
 	WordNode* insert(const char* keyword);
 	WordNode* find(string& keyword);
-	WordTree(){ count = 0; };
+	WordTree() { count = 0; };
 
 private:
 	WordNode m_emptyRoot;
@@ -59,5 +61,9 @@ private:
 
 public:
 	void load(const char* filepath);
-	void censor(string &source);
+	void load(const std::string& content);
+#ifdef _WIN32
+	bool loadFromRes(int nResID, const char *type);
+#endif
+	void censor(string& source);
 };
